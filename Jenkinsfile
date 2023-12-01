@@ -9,38 +9,31 @@ pipeline{
 }
 
     stages {
-        stage('Sudo') {
-            steps {
-                sh '''
-                    sudo su
-                '''
-            }
-        }
         stage('Install NPM') {
             steps {
                 sh '''
-                    sudo npm install
+                    npm install
                 '''
             }
         }
         stage('Test NPM') {
             steps {
                 sh '''
-                    sudo npm test
+                     npm test
                 '''
             }
         }
         stage('Construindo Docker') {
             steps {
                 sh '''
-                    sudo docker build .
+                    docker build .
                 '''
             }
         }
         stage('Compose Docker') {
             steps {
                 sh '''
-                   sudo docker compose up
+                 docker compose up
                 '''
             }
         }
