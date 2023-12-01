@@ -1,14 +1,43 @@
-pipeline {
+
+
+pipeline{
+
     agent any
 
     stages {
-        stage('Testes') {
+        stage('Sudo') {
             steps {
-                dir('/home/gui/Desktop/NodeGoat') {
-                    sh 'sudo su'
-                    sh 'sudo npm install' // Instalar dependências
-                    sh 'sudo npm test'    // Executar os testes
-                }
+                sh '''
+                    sudo su
+                '''
+            }
+        }
+        stage('Install NPM') {
+            steps {
+                sh '''
+                    sudo npm install
+                '''
+            }
+        }
+        stage('Test NPM') {
+            steps {
+                sh '''
+                    sudo npm test
+                '''
+            }
+        }
+        stage('Construindo Docker') {
+            steps {
+                sh '''
+                    docker build .
+                '''
+            }
+        }
+        stage('Compose Docker') {
+            steps {
+                sh '''
+                    docker compose up
+                '''
             }
         }
     }
