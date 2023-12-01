@@ -4,6 +4,10 @@ pipeline{
 
     agent any
 
+    environment {
+    CYPRESS_CACHE_FOLDER = "$WORKSPACE/cypress_cache"
+}
+
     stages {
         stage('Sudo') {
             steps {
